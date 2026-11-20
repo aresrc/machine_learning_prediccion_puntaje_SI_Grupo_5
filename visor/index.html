@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAES M1 | Visor del Grupo 5</title>
+<style>
+:root{font:16px/1.5 system-ui;color:#152341;background:#eff3fa;--blue:#2252d7;--ink:#132755;--muted:#526382}
+*{box-sizing:border-box}body{margin:0}header{background:linear-gradient(120deg,#11244d,#1844a7);color:white;padding:3.5rem max(5vw,calc((100% - 1050px)/2)) 4.75rem}header p{color:#d8e5ff;max-width:39rem;margin:.8rem 0 0}.course{font-weight:650;color:#bcd1ff;font-size:.9rem}h1{font-size:clamp(2.1rem,6vw,4rem);line-height:1.03;letter-spacing:-.045em;margin:.55rem 0 0}main{width:min(90%,1050px);margin:-2.4rem auto 0}section,.stat{background:#fff;border:1px solid #dae2f1;border-radius:16px}section{padding:clamp(1rem,4vw,2rem);margin:1.1rem 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:0}.stat{padding:1rem 1.2rem;margin:0}.stat dt{color:var(--muted);font-size:.95rem}.stat dd{margin:.25rem 0 0;font-weight:750;font-size:clamp(1.3rem,3vw,2rem);color:var(--ink)}h2{margin:0 0 .45rem;font-size:1.5rem;letter-spacing:-.025em}p{margin:.4rem 0 1rem}.muted{color:var(--muted)}label{font-weight:650;display:block;margin:.9rem 0 .35rem}select{appearance:none;background:#f3f6ff;color:var(--ink);padding:.55rem 2rem .55rem .7rem;border:1px solid #8c9fc5;border-radius:8px;font:inherit;width:min(100%,24rem);background-image:linear-gradient(45deg,transparent 50%,#2252d7 50%),linear-gradient(135deg,#2252d7 50%,transparent 50%);background-position:calc(100% - 15px) 50%,calc(100% - 10px) 50%;background-size:5px 5px;background-repeat:no-repeat}select:focus-visible,a:focus-visible{outline:3px solid #ef952e;outline-offset:3px}.bars{list-style:none;padding:0;margin:1.2rem 0}.bars li{display:grid;grid-template-columns:minmax(11rem,1fr) 2.7fr minmax(4.7rem,auto);gap:.75rem;align-items:center;margin:.9rem 0}.track{height:.75rem;border-radius:1rem;background:#ebf0f8;position:relative}.bar{position:absolute;height:100%;background:#7898eb;border-radius:1rem}.winner{font-weight:750}.winner .bar{background:var(--blue)}.value{text-align:right;font-variant-numeric:tabular-nums}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;text-align:left;font-variant-numeric:tabular-nums}th,td{padding:.65rem .6rem;border-bottom:1px solid #e1e8f3}thead{color:var(--muted);background:#f3f6fc}td:not(:first-child),thead th:not(:first-child){text-align:right;white-space:nowrap}tbody th{font-weight:550}.links{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;margin:.9rem 0 1.6rem}a{color:#1746bd;text-underline-offset:.2em}footer{width:min(90%,1050px);margin:auto;padding:0 0 1rem}@media(max-width:590px){header{padding-top:2.4rem}.stats{grid-template-columns:1fr}.stat{display:flex;align-items:center;justify-content:space-between;gap:.5rem}.stat dd{margin:0}.bars li{grid-template-columns:1fr auto;gap:.35rem}.track{grid-row:2;grid-column:1/-1}.value{grid-row:1;grid-column:2}}
+</style>
+</head>
+<body>
+<header>
+<div class="course">Sistemas de Información · Grupo 5 · Admisión 2026</div>
+<h1>Predicción del puntaje PAES M1</h1>
+<p>Resultados de tres modelos que estiman el puntaje de Matemática 1 a partir de antecedentes académicos y socioeconómicos.</p>
+</header>
+<main>
+<dl class="stats">
+<div class="stat"><dt>Puntajes válidos</dt><dd>246.014</dd></div>
+<div class="stat"><dt>Casos de prueba</dt><dd>49.203</dd></div>
+<div class="stat"><dt>Mejor MAE en prueba</dt><dd>86,33 pts</dd></div>
+</dl>
+<section aria-labelledby="comparar">
+<h2 id="comparar">Comparación de modelos</h2>
+<label for="metric">Métrica del gráfico</label>
+<select id="metric"><option value="mae">MAE en prueba</option><option value="cv">MAE en validación cruzada</option><option value="rmse">RMSE en prueba</option><option value="r2">R² en prueba</option></select>
+<p class="muted" id="explanation"></p>
+<ul id="bars" class="bars" aria-live="polite"></ul>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabla de métricas">
+<table><thead><tr><th scope="col">Modelo</th><th scope="col">MAE validación</th><th scope="col">MAE prueba</th><th scope="col">RMSE prueba</th><th scope="col">R² prueba</th></tr></thead>
+<tbody><tr><th scope="row">Mediana</th><td>116,13</td><td>116,50</td><td>149,72</td><td>-0,0444</td></tr><tr><th scope="row">Ridge</th><td>90,20</td><td>90,41</td><td>112,95</td><td>0,4056</td></tr><tr><th scope="row">HistGradientBoosting</th><td>86,31</td><td>86,33</td><td>108,90</td><td>0,4475</td></tr></tbody></table>
+</div>
+</section>
+<section aria-labelledby="evaluacion">
+<h2 id="evaluacion">Cómo se evaluaron</h2>
+<p>El proyecto reservó el 20 % de los registros para prueba y usó tres pliegues de validación cruzada en el 80 % restante. HistGradientBoosting obtuvo el menor MAE medio de validación.</p>
+<p class="muted">El MAE resume el error promedio en el conjunto evaluado. Para estimar puntajes de perfiles nuevos, el programa de Python requiere el modelo entrenado.</p>
+</section>
+</main>
+<footer class="links"><a href="https://github.com/aresrc/machine_learning_prediccion_puntaje_SI_Grupo_5">Repositorio y pasos de entrenamiento</a><a href="https://github.com/aresrc/machine_learning_prediccion_puntaje_SI_Grupo_5/blob/main/resultados/metricas.csv">Métricas originales</a><a href="https://github.com/aresrc/machine_learning_prediccion_puntaje_SI_Grupo_5/blob/main/resultados/pliegues.csv">Resultados por pliegue</a></footer>
+<script>
+const models = [{"name":"Mediana","cv":116.131469,"mae":116.4994,"rmse":149.718991,"r2":-0.044359},{"name":"Ridge","cv":90.19806,"mae":90.410936,"rmse":112.947369,"r2":0.405642},{"name":"HistGradientBoosting","cv":86.305209,"mae":86.334759,"rmse":108.897552,"r2":0.4475}];
+const metrics = {
+  mae: "Error absoluto medio en puntos PAES. Menor es mejor.",
+  cv: "Media del error absoluto en los tres pliegues de validación. Menor es mejor.",
+  rmse: "Raíz del error cuadrático medio en puntos PAES. Menor es mejor.",
+  r2: "Proporción de variación explicada. Mayor es mejor. La línea marca el cero."
+};
+const select = document.getElementById("metric");
+const list = document.getElementById("bars");
+function render() {
+  const metric = select.value;
+  const values = models.map(model => model[metric]);
+  const min = Math.min(0, ...values);
+  const max = Math.max(...values);
+  const position = value => 100 * (value - min) / (max - min);
+  const origin = position(0);
+  document.getElementById("explanation").textContent = metrics[metric];
+  list.replaceChildren(...models.map(model => {
+    const item = document.createElement("li");
+    if (model.name === "HistGradientBoosting") item.classList.add("winner");
+    const name = document.createElement("span");
+    name.textContent = model.name;
+    const track = document.createElement("span");
+    track.className = "track";
+    track.setAttribute("aria-hidden", "true");
+    const bar = document.createElement("span");
+    bar.className = "bar";
+    const point = position(model[metric]);
+    bar.style.left = Math.min(origin, point) + "%";
+    bar.style.width = Math.abs(point - origin) + "%";
+    track.append(bar);
+    if (min < 0) {
+      const zero = document.createElement("span");
+      zero.style.cssText = "position:absolute;top:-3px;bottom:-3px;border-left:1px solid #152341;left:" + origin + "%";
+      track.append(zero);
+    }
+    const value = document.createElement("span");
+    value.className = "value";
+    const digits = metric === "r2" ? 4 : 2;
+    value.textContent = model[metric].toLocaleString("es-CL", {minimumFractionDigits:digits, maximumFractionDigits:digits});
+    item.append(name, track, value);
+    return item;
+  }));
+}
+select.addEventListener("change", render);
+render();
+</script>
+</body>
+</html>
