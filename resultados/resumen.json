@@ -1,0 +1,25 @@
+{
+  "registros_inscritos": 320087,
+  "registros_socioeconomicos": 320087,
+  "puntaje_vacio_o_no_numerico": 19496,
+  "puntaje_cero": 54577,
+  "puntaje_fuera_de_escala_distinto_de_cero": 0,
+  "puntaje_valido": 246014,
+  "puntaje_valido_sin_cruce_socioeconomico": 0,
+  "faltantes_modelado": {
+    "PROMEDIO_NOTAS": 2078,
+    "PTJE_NEM": 2078,
+    "PTJE_RANKING": 2078,
+    "ANYO_DE_EGRESO": 85,
+    "RAMA_EDUCACIONAL": 217,
+    "DEPENDENCIA": 2089,
+    "CODIGO_REGION_EGRESO": 733,
+    "CODIGO_REGION_DOMICILIO": 0,
+    "INGRESO_PERCAPITA_GRUPO_FA": 61626
+  },
+  "semilla": 42,
+  "entrenamiento": 196811,
+  "prueba": 49203,
+  "pliegues": 3,
+  "modelo_seleccionado_por_mae_cv": "HistGradientBoosting"
+}

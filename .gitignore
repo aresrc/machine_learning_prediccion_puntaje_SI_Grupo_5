@@ -1,0 +1,9 @@
+/datos/
+/salida/
+*.csv
+*.rar
+*.joblib
+!resultados/metricas.csv
+!resultados/pliegues.csv
+.venv/
+__pycache__/
